@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
+  level    Int
+
+  @@map("user")
+}
+
+model Occupation {
+  id        Int        @id @default(autoincrement())
+  name      String
+  employees Employee[]
+
+  @@map("occupation")
+}
+
+model Employee {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String
+  address   String
+  cpf       String  @unique
+  situation Boolean @default(true)
+
+  Occupation   Occupation @relation(fields: [occupationId], references: [id])
+  occupationId Int
+
+  clients   Client[]
+  bag       Bag[]
+  Deliverys Delivery[]
+
+  @@map("employee")
+}
+
+model Client {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String
+  cnpj      String  @unique
+  city      String
+  address   String
+  situation Boolean @default(true)
+
+  Employee   Employee @relation(fields: [employeeId], references: [id])
+  employeeId Int
+
+  bag Bag[]
+
+  @@map("client")
+}
+
+model Provider {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String
+  situation Boolean @default(true)
+  cnpj      String  @unique
+  address   String
+  seller    String
+
+  itens Item[]
+
+  @@map("provider")
+}
+
+model Item {
+  id             Int      @id @default(autoincrement())
+  name           String
+  priceBurden    Float
+  priceUnity     Float
+  amountBurden   Int
+  category       String
+  milliliter     Float
+  milliliterBale Float
+  createdAt      DateTime @default(now())
+
+  provider   Provider @relation(fields: [providerId], references: [id])
+  providerId Int
+
+  sale Sale[]
+
+  @@map("item")
+}
+
+model Bag {
+  id        Int      @id @default(autoincrement())
+  total     Float
+  status    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  client   Client @relation(fields: [clientId], references: [id])
+  clientId Int
+
+  employeeSale   Employee @relation(fields: [employeeSaleId], references: [id])
+  employeeSaleId Int
+
+  charge   Charge? @relation(fields: [chargeId], references: [id])
+  chargeId Int?
+
+  sale Sale[]
+
+  @@map("bag")
+}
+
+model Sale {
+  id    Int   @id @default(autoincrement())
+  amout Int
+  total Float
+
+  item   Item @relation(fields: [itemId], references: [id])
+  itemId Int
+
+  bag   Bag @relation(fields: [bagId], references: [id])
+  bagId Int
+
+  @@map("sale")
+}
+
+model Delivery {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  release   Boolean  @default(true)
+
+  employeeDelivery   Employee @relation(fields: [employeeDeliveryId], references: [id])
+  employeeDeliveryId Int
+
+  charge Charge[]
+
+  @@map("delivery")
+}
+
+model Charge {
+  id         Int       @id @default(autoincrement())
+  release    Boolean   @default(false)
+  name       String
+  bag        Bag[]
+  delivery   Delivery? @relation(fields: [deliveryId], references: [id])
+  deliveryId Int?
+
+  @@map("charge")
+}
