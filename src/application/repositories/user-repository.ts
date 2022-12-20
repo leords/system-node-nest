@@ -2,9 +2,9 @@ import { User } from "../entities/user";
 
 export abstract class userRepository {
     abstract create(user: User) : Promise<void>;
-    abstract delete(id: string) : Promise<User | null>
-    abstract findById(id: string) : Promise<User | null>
+    abstract delete(id: number) : Promise<User | null>
+    abstract findById(id: number) : Promise<User | null>
     abstract FindMany() : Promise<User[]>
-    abstract updatePassword(id: string) : Promise<void>
-    abstract updateLevel(id: number) : Promise<void>
+    abstract updatePassword(id: number, password: string) : Promise<void>
+    abstract updateLevel(id: number, level: number) : Promise<void>
 }
