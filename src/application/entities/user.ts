@@ -1,14 +1,14 @@
 
-interface UserProps {
-    id?:       number;
-    _name:    string;
+export interface UserProps {
+    id? : number;
+    name:    string;
     password: string;
     level:    number;
 }
 
 export class User {
 
-    private props: UserProps
+    private props?: UserProps
 
     constructor(props: UserProps) {
         this.props = { ...props };
@@ -18,12 +18,12 @@ export class User {
         return this.props.id
     }
 
-    public set _name(_name: string) {
-        this.props._name = _name;
+    public set name(name: string) {
+        this.props.name = name;
     }
 
-    public get _name(): string {
-        return this.props._name
+    public get name(): string {
+        return this.props.name
     }
 
     public set password(password: string) {
