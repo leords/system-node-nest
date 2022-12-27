@@ -1,8 +1,10 @@
-import { User } from "src/application/entities/user";
+import { Name } from "src/application/entities/user/name";
+import { Password } from "src/application/entities/user/password";
+import { User } from "src/application/entities/user/user";
 import { userRepository } from "src/application/repositories/user-repository";
 
 interface CreateUserRequest {
-    _name: string;
+    name: string;
     password: string;
     level: number
 }
@@ -15,12 +17,12 @@ export class CreateUser {
     constructor(private userRepository: userRepository) {}
 
     async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
-        const { _name, password, level } = request;
+        const { name, password, level } = request;
 
         const user = new User({
-            _name,
+            name: new Name(name),
             level,
-            password
+            password: new Password(password)
         });
 
         await this.userRepository.create(user)

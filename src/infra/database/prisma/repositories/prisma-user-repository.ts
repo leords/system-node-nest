@@ -1,4 +1,4 @@
-import { User } from "src/application/entities/user";
+import { User } from "src/application/entities/user/user";
 import { userRepository } from "src/application/repositories/user-repository";
 import { PrismaUserMapper } from "../mappers/prisma-user-mapper";
 import { PrismaService } from "../prisma.service";
@@ -6,7 +6,7 @@ import { PrismaService } from "../prisma.service";
 export class PrismaUserRepository implements userRepository {
     constructor(private prisma: PrismaService) {}
 
-    async create(user: User): Promise<string> {
+    async create(user: User): Promise<User | null> {
 
         const userAlreadyExist = await this.prisma.user.findUnique({
             where: {
@@ -21,9 +21,9 @@ export class PrismaUserRepository implements userRepository {
                 data: raw
             });
 
-            return 'ok'
+            return PrismaUserMapper.toDomain(userAlreadyExist)
         }
-        return 'nok'
+        return null
     }
 
     async delete(id: number): Promise<User | null> {
@@ -52,8 +52,14 @@ export class PrismaUserRepository implements userRepository {
     }
 
 
-    FindMany(): Promise<User[]> {
-        return
+    async FindMany(): Promise<User[]> {
+        const userFindMany = await this.prisma.user.findMany()
+
+        if(!userFindMany) {
+            return null
+        }
+
+        return userFindMany
     }
 
 

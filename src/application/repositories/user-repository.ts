@@ -1,7 +1,7 @@
 import { User } from "../entities/user";
 
 export abstract class userRepository {
-    abstract create(user: User) : Promise<string>;
+    abstract create(user: User) : Promise<User | null>;
     abstract delete(id: number) : Promise<User | null>
     abstract findById(id: number) : Promise<User | null>
     abstract FindMany() : Promise<User[]>

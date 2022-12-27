@@ -5,7 +5,7 @@ export class CreateUserBody {
 
     @IsNotEmpty()
     @Length(3,240)
-    _name: string;
+    name: string;
 
     @IsNotEmpty()
     @Length(8,100)

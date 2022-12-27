@@ -1,8 +1,10 @@
+import { Name } from "./name";
+import { Password } from "./password";
 
 export interface UserProps {
     id? : number;
-    name:    string;
-    password: string;
+    name:  Name;
+    password: Password;
     level:    number;
 }
 
@@ -18,19 +20,19 @@ export class User {
         return this.props.id
     }
 
-    public set name(name: string) {
+    public set name(name: Name) {
         this.props.name = name;
     }
 
-    public get name(): string {
+    public get name(): Name {
         return this.props.name
     }
 
-    public set password(password: string) {
+    public set password(password: Password) {
         this.props.password = password;
     }
 
-    public get password(): string {
+    public get password(): Password {
         return this.props.password
     }
 
