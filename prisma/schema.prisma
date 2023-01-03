@@ -41,6 +41,7 @@ model Employee {
   clients   Client[]
   bag       Bag[]
   Deliverys Delivery[]
+  loans     Loan[]
 
   @@map("employee")
 }
@@ -57,7 +58,8 @@ model Client {
   Employee   Employee @relation(fields: [employeeId], references: [id])
   employeeId Int
 
-  bag Bag[]
+  bag   Bag[]
+  loans Loan[]
 
   @@map("client")
 }
@@ -151,4 +153,29 @@ model Charge {
   deliveryId Int?
 
   @@map("charge")
+}
+
+model Loan {
+  id     Int      @id @default(autoincrement())
+  bottle Bottle[]
+  status Boolean  @default(true)
+  amount Int
+
+  employee       Employee @relation(fields: [loanIdEmployee], references: [id])
+  loanIdEmployee Int
+
+  client       Client @relation(fields: [loanIdClient], references: [id])
+  loanIdClient Int
+
+  @@map("Loan")
+}
+
+model Bottle {
+  id     Int     @id @default(autoincrement())
+  name   String
+  status Boolean @default(true)
+  loan   Loan?   @relation(fields: [loanId], references: [id])
+  loanId Int?
+
+  @@map("Bottle")
 }
