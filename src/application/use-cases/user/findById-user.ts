@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common"
-import { User } from "src/application/entities/user"
+import { User } from "src/application/entities/user/user"
 
 import { userRepository } from "src/application/repositories/user-repository"
 import { FindNotFound } from "./error/find-not-found"
 
 interface FindByIdUserRequest {
     _id: number
-}
+}    
 
 interface FindByIdResponse {
     user: User

@@ -22,5 +22,3 @@ export class UpdatePasswordUser {
         }
     }
 }
-
-// talvez retornar da updatePassword o User e comprar o atualizar com o que vem do request.
