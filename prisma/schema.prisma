@@ -125,7 +125,7 @@ model Bag {
 
 model Sale {
   id    Int   @id @default(autoincrement())
-  amout Int
+  amount Int
   total Float
 
   item   Item @relation(fields: [itemId], references: [id])
@@ -189,7 +189,7 @@ model Bottle {
 
 model Stock {
   id Int @id @default(autoincrement())
-  amout Int
+  amount Int
   date DateTime @default(now())
   type String
 
