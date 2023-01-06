@@ -1,4 +1,5 @@
-import { Charge } from "@prisma/client";
+import { Charge } from "../charge/charge";
+
 
 export interface deliveryProps {
     id?: number;

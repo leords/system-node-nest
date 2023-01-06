@@ -1,4 +1,5 @@
 import { Bag } from "@prisma/client";
+import { Loan } from "../loan/loan";
 
 export interface clientProps {
     id?: number;
