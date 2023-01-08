@@ -1,4 +1,6 @@
-import { Item } from "@prisma/client";
+
+import { Item } from "../item/item";
+import { Stock } from "../stock/stock";
 
 export interface providerProps {
     id?: number;
@@ -8,8 +10,9 @@ export interface providerProps {
     cnpj: string;
     address: string;
     seller: string;
-    item: Item;
-    stock: Stock;
+    item: Item[];
+
+    providerId: number
 }
 
 export class Provider {
@@ -71,19 +74,19 @@ export class Provider {
         this.props.seller = seller
     }
 
-    public get item(): Item {
+    public get item(): Item[] {
         return this.props.item
     }
 
-    public set item(item: Item) {
+    public set item(item: Item[]) {
         this.props.item = item
     }
 
-    public get stock(): Stock {
-        return this.props.stock
+    public get providerId(): number {
+        return this.props.providerId
     }
 
-    public set stock(stock: Stock) {
-        this.props.stock = stock
+    public set providerId(providerId: number) {
+        this.props.providerId = providerId
     }
 }

@@ -5,7 +5,8 @@ export interface deliveryProps {
     id?: number;
     createdAt: Date;
     release: boolean;
-    charge: Charge;
+    charge: Charge[];
+    deliveryId: number
 }
 
 export class Delivery {
@@ -24,7 +25,7 @@ export class Delivery {
     }
 
     public set createdAt(createdAt: Date){
-        this.props.createdAt = this.createdAt
+        this.props.createdAt = createdAt
     }
 
     public get release(): boolean {
@@ -32,14 +33,22 @@ export class Delivery {
     }
 
     public set release(release: boolean){
-        this.props.release = this.release
+        this.props.release = release
     }
 
-    public get charge(): Charge {
+    public get charge(): Charge[] {
         return this.props.charge
     }
 
-    public set charge(charge: Charge){
-        this.props.charge = this.charge
+    public set charge(charge: Charge[]){
+        this.props.charge = charge
+    }
+
+    public get deliveryId(): number {
+        return this.props.deliveryId
+    }
+
+    public set deliveryId(deliveryId: number){
+        this.props.deliveryId = deliveryId
     }
 }

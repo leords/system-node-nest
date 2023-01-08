@@ -74,7 +74,6 @@ model Provider {
   seller    String
 
   itens Item[]
-  stocks Stock[]
 
   @@map("provider")
 }
@@ -93,10 +92,8 @@ model Item {
   provider   Provider @relation(fields: [providerId], references: [id])
   providerId Int
 
-  stock Stock? @relation(fields: [stockId], references: [id])
+  stock   Stock? @relation(fields: [stockId], references: [id])
   stockId Int?
-
-
 
   sale Sale[]
 
@@ -124,9 +121,9 @@ model Bag {
 }
 
 model Sale {
-  id    Int   @id @default(autoincrement())
+  id     Int   @id @default(autoincrement())
   amount Int
-  total Float
+  total  Float
 
   item   Item @relation(fields: [itemId], references: [id])
   itemId Int
@@ -165,7 +162,7 @@ model Loan {
   id     Int      @id @default(autoincrement())
   bottle Bottle[]
   status Boolean  @default(true)
-  date DateTime @default(now())
+  date   DateTime @default(now())
   amount Int
 
   employee       Employee @relation(fields: [loanIdEmployee], references: [id])
@@ -188,14 +185,10 @@ model Bottle {
 }
 
 model Stock {
-  id Int @id @default(autoincrement())
+  id     Int      @id @default(autoincrement())
   amount Int
-  date DateTime @default(now())
-  type String
+  date   DateTime @default(now())
+  type   String
 
   item Item[]
-
-  provider Provider @relation(fields: [providerId], references: [id])
-  providerId Int
-
 }

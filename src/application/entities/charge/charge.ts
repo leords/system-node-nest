@@ -1,10 +1,11 @@
-import { Bag } from "@prisma/client";
+import { Bag, Delivery } from "@prisma/client";
 
 export interface chargeProps {
     id?: number;
     release: boolean;
     name: string;
-    bag: Bag;
+    bag: Bag[];
+    deliveryId: number
 }
 
 export class Charge {
@@ -34,11 +35,11 @@ export class Charge {
         this.props.name = name
     }
 
-    public get bag(): Bag {
+    public get bag(): Bag[] {
         return this.props.bag
     }
 
-    public set bag(bag: Bag) {
+    public set bag(bag: Bag[]) {
         this.props.bag = bag
     }
 }

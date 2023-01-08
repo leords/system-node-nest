@@ -1,11 +1,15 @@
 import { Sale } from "@prisma/client";
+import { Client } from "../client/client";
+import { Employee } from "../employee/employee";
 
 export interface bagProps {
     id?: number;
     total: number;
     status: boolean;
     createdAt: Date;
-    sale: Sale;
+    clientId: number;
+    employeeSaleId: number;
+    sale: Sale[];
 }
 
 export class Bag {
@@ -43,12 +47,28 @@ export class Bag {
         this.props.createdAt = createdAt
     }
 
-    public get sale(): Sale {
+    public get sale(): Sale[] {
         return this.props.sale
     }
 
-    public set sale(sale: Sale) {
+    public set sale(sale: Sale[]) {
         this.props.sale = sale
+    }
+
+    public get clientId(): number {
+        return this.props.clientId
+    }
+
+    public set clientId(clientId: number) {
+        this.props.clientId = clientId
+    }
+
+    public get employeeSaleId(): number {
+        return this.props.employeeSaleId
+    }
+
+    public set employeeSaleId(employeeSaleId: number) {
+        this.props.employeeSaleId = employeeSaleId
     }
 }
 

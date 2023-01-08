@@ -1,9 +1,17 @@
+
+import { Bottle } from "../bottle/bottle";
+import { Client } from "../client/client";
+import { Employee } from "../employee/employee";
+
 export interface loanProps {
     id?: number;
-    bottle: Bottle;
+    bottle: Bottle[];
     status: boolean;
     date: Date;
-    amount: number
+    amount: number;
+
+    employeeId: number;
+    clientId: number;
 }
 
 export class Loan {
@@ -17,11 +25,11 @@ export class Loan {
         return this.props.id
     }
 
-    public get bottle(): Bottle {
+    public get bottle(): Bottle[] {
         return this.props.bottle
     }
 
-    public set bottle(bottle: Bottle) {
+    public set bottle(bottle: Bottle[]) {
         this.props.bottle = bottle
     }
 
@@ -47,5 +55,21 @@ export class Loan {
 
     public set amount(amount: number) {
         this.props.amount = amount
+    }
+
+    public get employeeId(): number {
+        return this.props.employeeId
+    }
+
+    public set employeeId(employeeId: number) {
+        this.props.employeeId = employeeId
+    }
+
+    public get clientId(): number {
+        return this.props.clientId
+    }
+
+    public set clientId(clientId: number) {
+        this.props.clientId = clientId
     }
 }

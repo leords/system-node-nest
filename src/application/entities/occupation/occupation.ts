@@ -4,7 +4,7 @@ import { Employee } from "@prisma/client";
 export interface occupationProps {
     id?: number;
     name: string;
-    employee: Employee
+    employee: Employee[]
 }
 
 export class Occupation {
@@ -26,11 +26,11 @@ export class Occupation {
         this.props.name = name
     }
 
-    public get employee(): Employee {
+    public get employee(): Employee[] {
         return this.props.employee
     }
 
-    public set employee(employee: Employee) {
+    public set employee(employee: Employee[]) {
         this.props.employee = employee
     }
 }

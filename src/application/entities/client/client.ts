@@ -8,8 +8,9 @@ export interface clientProps {
     city: string;
     address: string;
     situation: boolean;
-    bag: Bag;
-    loan: Loan; 
+    bag: Bag[];
+    loan: Loan[]; 
+    employeeId: number
 
 }
 
@@ -64,20 +65,28 @@ export class Client {
         this.props.situation = situation
     }
 
-    public get bag(): Bag {
+    public get bag(): Bag[] {
         return this.props.bag
     }
 
-    public set bag(bag: Bag) {
+    public set bag(bag: Bag[]) {
         this.props.bag = bag
     }
 
-    public get loan(): Loan {
+    public get loan(): Loan[] {
         return this.props.loan
     }
 
-    public set loan(loan: Loan) {
+    public set loan(loan: Loan[]) {
         this.props.loan = loan
+    }
+
+    public get employeeId(): number {
+        return this.props.employeeId
+    }
+
+    public set employeeId(employee: number) {
+        this.props.employeeId = employee
     }
     
 }

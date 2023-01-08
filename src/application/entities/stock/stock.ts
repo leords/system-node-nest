@@ -5,7 +5,7 @@ export interface stockProps {
     amount: number;
     date: Date;
     type: string
-    item: Item;
+    item: Item[];
 }
 
 export class Stock {
@@ -43,11 +43,11 @@ export class Stock {
         this.props.type = type
     }
 
-    public get item(): Item {
+    public get item(): Item[] {
         return this.props.item
     }
 
-    public set item(item: Item) {
+    public set item(item: Item[]) {
         this.props.item = item
     }
 }

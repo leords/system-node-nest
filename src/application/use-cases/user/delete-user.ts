@@ -14,12 +14,10 @@ export class DeleteUser {
 
     async execute(request: DeleteUserRequest): Promise<DeleteUserResponse> {
         const { _id } = request
-
         await this.userRepository.delete(_id)
 
         return {
             _id,
-        };
-        
+        };  
     }
 }

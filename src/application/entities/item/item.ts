@@ -10,6 +10,8 @@ export interface itemProps {
     milliliterBale: number;
     createdAt: Date;
     sale: Sale;
+
+    providerId: number;
 }
 
 export class Item {
@@ -86,5 +88,12 @@ export class Item {
     public set sale(sale: Sale) {
         this.props.sale = sale
     }
-    
+
+    public get providerId(): number {
+        return this.props.providerId
+    }
+
+    public set providerId(providerId: number) {
+        this.props.providerId = providerId
+    }    
 }

@@ -10,11 +10,12 @@ export interface employeeProps {
     address: string;
     cpf: string;
     situation: boolean;
+    occupationId: number;
 
-    clients: Client;
-    bags: Bag;
-    deliverys: Delivery;
-    loans: Loan
+    clients: Client[];
+    bags: Bag[];
+    deliverys: Delivery[];
+    loans: Loan[]
 }
 
 export class Employee {
@@ -68,35 +69,43 @@ export class Employee {
         this.props.situation = situation
     }
 
-    public get client(): Client {
+    public get occupationId(): number {
+        return this.props.occupationId
+    }
+
+    public set occupationId(occupationId: number) {
+        this.props.occupationId = occupationId
+    }
+
+    public get client(): Client[] {
         return this.props.clients
     }
 
-    public set client(client: Client) {
+    public set client(client: Client[]) {
         this.props.clients = client
     }
 
-    public get bag(): Bag {
+    public get bag(): Bag[] {
         return this.props.bags
     }
 
-    public set bag(bag: Bag) {
+    public set bag(bag: Bag[]) {
         this.props.bags = bag
     }
 
-    public get deliverys(): Delivery {
+    public get deliverys(): Delivery[] {
         return this.props.deliverys
     }
 
-    public set deliverys(deliverys: Delivery) {
+    public set deliverys(deliverys: Delivery[]) {
         this.props.deliverys = deliverys
     }
 
-    public get loans(): Loan {
+    public get loans(): Loan[] {
         return this.props.loans
     }
 
-    public set loans(loan: Loan) {
+    public set loans(loan: Loan[]) {
         this.props.loans = loan
     }
 

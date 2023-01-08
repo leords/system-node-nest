@@ -6,6 +6,8 @@ export abstract class ChargeRepository {
     abstract deleteBag(id: number, bagId: number): Promise<void>
     abstract findUnique(id: number): Promise<Charge | null>
     abstract findMany(): Promise<Charge | null>
+    abstract findManyByName(name: string): Promise<Charge | null>
     abstract updateRelease(id: number, release: boolean): Promise<void>
-    abstract updateName(Id: number, name: string): Promise<void>
+    abstract updateName(id: number, name: string): Promise<void>
+    abstract updateDelivery(id: number, deliveryId: number): Promise<void>
 }

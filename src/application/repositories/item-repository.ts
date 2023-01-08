@@ -15,10 +15,6 @@ export abstract class ItemRepository {
         milliliter: number, 
         milliliterBale: number
         ): Promise<void>
-
-    abstract updateName(id: number, name: string): Promise<void>
-    abstract updatePriceBurden(id: number, priceBurden: number): Promise<void>
-    abstract updatePriceUnity(id: number, priceUnity: number): Promise<void>
-    abstract updatePriceUnity(id: number, priceUnity: number): Promise<void>
 }
- 
+
+// verificar se é possivel ter apenas uma classe para fazer updates!

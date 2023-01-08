@@ -2,6 +2,9 @@ export interface saleProps {
     id?: number;
     amount: number;
     total: number;
+
+    itemId: number;
+    bagId: number;
 }
 
 export class Sale {
