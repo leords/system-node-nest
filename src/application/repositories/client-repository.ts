@@ -9,5 +9,4 @@ export abstract class ClientRepository {
     abstract findManyBySituation(situation: boolean): Promise<Client | null>
     abstract findManyByName(name: string): Promise<Client | null>
     abstract findMany(): Promise<Client | null>
-
 }

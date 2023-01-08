@@ -1,3 +1,8 @@
+import { Bag } from "../bag/bag";
+import { Client } from "../client/client";
+import { Delivery } from "../delivery/delivery";
+import { Loan } from "../loan/loan";
+
 export interface employeeProps {
     id?: number;
     name: string;
@@ -87,11 +92,11 @@ export class Employee {
         this.props.deliverys = deliverys
     }
 
-    public get loans(): loan {
+    public get loans(): Loan {
         return this.props.loans
     }
 
-    public set loans(loan: loan) {
+    public set loans(loan: Loan) {
         this.props.loans = loan
     }
 
