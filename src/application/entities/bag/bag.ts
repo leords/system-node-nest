@@ -9,7 +9,7 @@ export interface bagProps {
     createdAt: Date;
     clientId: number;
     employeeSaleId: number;
-    sale: Sale[];
+    sale?: Sale[];
 }
 
 export class Bag {

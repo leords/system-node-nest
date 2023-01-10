@@ -1,6 +1,6 @@
 import { Bag } from "../entities/bag/bag";
 
-export abstract class bagRepository {
+export abstract class BagRepository {
     abstract create(bag: Bag): Promise<Bag | null>
     abstract findUnique(id: number): Promise<Bag | null>
     abstract findMany(): Promise<Bag | null>

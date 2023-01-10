@@ -1,6 +1,5 @@
 import { Bottle } from "../entities/bottle/bottle";
 
-
 export abstract class BottleRepository {
     abstract create(bottle: Bottle): Promise<Bottle | null>
     abstract delete(id: number): Promise<void>
