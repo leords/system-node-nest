@@ -1,6 +1,4 @@
 import { Sale } from "@prisma/client";
-import { Client } from "../client/client";
-import { Employee } from "../employee/employee";
 
 export interface bagProps {
     id?: number;

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common"
-import { User } from "src/application/entities/user"
+import { User } from "src/application/entities/user/user"
 import { userRepository } from "src/application/repositories/user-repository"
 
 interface FindManyUserRequest {
