@@ -14,12 +14,12 @@ interface FindManyUserResponse {
 export class FindManyUser {
     constructor(private userRepository: userRepository) {}
 
-    async execute(request: FindManyUserRequest): Promise<FindManyUserResponse> {
-        
-       const users =  await this.userRepository.FindMany()
+        async execute(request: FindManyUserRequest): Promise<FindManyUserResponse> {
+            
+        const users =  await this.userRepository.FindMany()
 
-        return {
-            users
-        };
-    }
+            return {
+                users
+            };
+        }
 }

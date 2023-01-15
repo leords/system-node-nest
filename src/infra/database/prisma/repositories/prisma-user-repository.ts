@@ -21,19 +21,17 @@ export class PrismaUserRepository implements userRepository {
                 data: raw
             });
 
-            return PrismaUserMapper.toDomain(userAlreadyExist)
+            return PrismaUserMapper.toDomain(userAlreadyExist);
         }
         return null
     }
 
-    async delete(id: number): Promise<User | null> {
+    async delete(id: number): Promise<void> {
         const user = await this.prisma.user.delete({
             where: {
                 id: id
             }
         });
-
-        return user
     }
 
 
@@ -52,14 +50,14 @@ export class PrismaUserRepository implements userRepository {
     }
 
 
-    async FindMany(): Promise<User[]> {
+    async FindMany(): Promise<User[] | null> {
         const userFindMany = await this.prisma.user.findMany()
 
         if(!userFindMany) {
             return null
         }
 
-        return userFindMany
+        return userFindMany.map(PrismaUserMapper.toDomain)
     }
 
 

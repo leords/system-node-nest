@@ -1,25 +1,28 @@
+import { Injectable } from "@nestjs/common";
 import { Bag } from "src/application/entities/bag/bag";
 import { BagRepository } from "src/application/repositories/bag-repository";
 import { FindNotFound } from "./error/find-not-found";
 
-export interface FindManyResponse {
 
+interface findManyBagRequest {
+    id: number
 }
 
-export interface FindManyRequest {
-    bag: Bag[];
+interface findManyBagResponse {
+    bags: Bag[]
 }
 
-export class FindMany {
+@Injectable()
+export class FindManyBag {
     constructor(private bagRepository: BagRepository ) {}
 
-        async execute(request: FindManyRequest): Promise<FindManyResponse> {
+        async execute(request: findManyBagRequest): Promise<findManyBagResponse> {
 
-            const users = this.bagRepository.findMany();
+            const bags = await this.bagRepository.findMany();
 
-            if(!users) {
+            if(!bags) {
                 return {
-                    users
+                    bags
                 }
             } else {
                 throw new FindNotFound
