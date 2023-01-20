@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { Bag } from "src/application/entities/bag/bag"
 import { BagRepository } from "src/application/repositories/bag-repository";
 import { FindNotFound } from "./error/find-not-found";
@@ -10,7 +11,7 @@ export interface BagFindUniqueResponse {
     bag: Bag
 }
 
-
+@Injectable()
 export class FindUnique {
     constructor(private bagRepository: BagRepository) {}
 

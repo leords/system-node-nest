@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { BagRepository } from "src/application/repositories/bag-repository";
 import { ErrorDelete } from "./error/error-delete-sale";
 
@@ -8,7 +9,7 @@ interface deleteSaleRequest {
 
 type deleteSaleResponse = void;
 
-
+@Injectable()
 export class DeleteSale {
     constructor(private bagRepository: BagRepository) {}
 

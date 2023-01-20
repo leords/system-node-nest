@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { Bag } from "src/application/entities/bag/bag";
 import { Sale } from "src/application/entities/sale/sale";
 import { BagRepository } from "src/application/repositories/bag-repository";
@@ -17,6 +18,7 @@ interface CreateBagResponse {
     bag: Bag;
 }
 
+@Injectable()
 export class CreateBag {
     constructor(private bagRepository: BagRepository) {}
 

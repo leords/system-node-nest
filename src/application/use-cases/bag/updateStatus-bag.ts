@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { BagRepository } from "src/application/repositories/bag-repository";
 import { UpdateNotFound } from "./error/update-not-found";
 
@@ -6,6 +7,7 @@ export interface updateStatusRequest {
     status: boolean;
 }
 
+@Injectable()
 export class UpdateStatus {
     constructor(private bagRepository: BagRepository) {}
 

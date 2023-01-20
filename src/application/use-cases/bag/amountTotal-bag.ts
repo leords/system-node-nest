@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { BagRepository } from "src/application/repositories/bag-repository"
 import { FindNotFound } from "./error/find-not-found";
 
@@ -9,6 +10,7 @@ export interface amountTotalResponse {
     total: number
 }
 
+@Injectable()
 export class AmountTotal {
     constructor(private bagRepository: BagRepository) {}
 
