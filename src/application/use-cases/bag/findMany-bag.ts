@@ -4,10 +4,6 @@ import { BagRepository } from "src/application/repositories/bag-repository";
 import { FindNotFound } from "./error/find-not-found";
 
 
-interface findManyBagRequest {
-    id: number
-}
-
 interface findManyBagResponse {
     bags: Bag[]
 }
@@ -16,7 +12,7 @@ interface findManyBagResponse {
 export class FindManyBag {
     constructor(private bagRepository: BagRepository ) {}
 
-        async execute(request: findManyBagRequest): Promise<findManyBagResponse> {
+        async execute(): Promise<findManyBagResponse> {
 
             const bags = await this.bagRepository.findMany();
 

@@ -1,5 +1,5 @@
-import { isNotEmpty } from "class-validator";
-import { IsInt, IsNotEmpty, Length, Max, Min } from "class-validator/types/decorator/decorators";
+import { IsInt, IsNotEmpty, Length, Max, Min } from "class-validator";
+
 
 export class CreateUserBody {
 
