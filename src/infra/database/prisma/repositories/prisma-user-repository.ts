@@ -1,63 +1,58 @@
+import { Injectable } from "@nestjs/common";
 import { User } from "src/application/entities/user/user";
 import { userRepository } from "src/application/repositories/user-repository";
 import { PrismaUserMapper } from "../mappers/prisma-user-mapper";
 import { PrismaService } from "../prisma.service";
 
+@Injectable()
 export class PrismaUserRepository implements userRepository {
     constructor(private prisma: PrismaService) {}
 
-    async create(user: User): Promise<User | null> {
+    async create(user: User): Promise<void> {
 
-        const userAlreadyExist = await this.prisma.user.findUnique({
-            where: {
-                id: user.id
-            }
-        });
-
-        if(!userAlreadyExist) {
             const raw = PrismaUserMapper.toPrisma(user)
 
             await this.prisma.user.create({
                 data: raw
             });
-
-            return PrismaUserMapper.toDomain(userAlreadyExist);
-        }
-        return null
     }
 
     async delete(id: number): Promise<void> {
-        const user = await this.prisma.user.delete({
+        await this.prisma.user.delete({
             where: {
                 id: id
             }
         });
     }
 
-
     async findById(id: number): Promise<User | null> {
-        const userFindById = await this.prisma.user.findUnique ({
+        const user = await this.prisma.user.findUnique ({
             where: {
                 id: id
             },
         });
 
-        if(!userFindById) {
+        if(!user) {
             return null;
         }
 
-        return PrismaUserMapper.toDomain(userFindById)
+        return PrismaUserMapper.toDomain(user)
     }
 
+    async FindMany(): Promise<User[]> {
+        const users = await this.prisma.user.findMany({
+            orderBy: [
+                {
+                    name: "asc"
+                } 
+            ] 
+        })
 
-    async FindMany(): Promise<User[] | null> {
-        const userFindMany = await this.prisma.user.findMany()
-
-        if(!userFindMany) {
+        if(!users) {
             return null
         }
 
-        return userFindMany.map(PrismaUserMapper.toDomain)
+        return users.map(PrismaUserMapper.toDomain)
     }
 
 
@@ -71,7 +66,6 @@ export class PrismaUserRepository implements userRepository {
             }
         });
     }
-
 
     async updateLevel(id: number, level: number): Promise<void> {
         await this.prisma.user.update({

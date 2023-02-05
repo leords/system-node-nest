@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { userRepository } from "src/application/repositories/user-repository";
 import { UpdateNotFound } from "./error/updade-not-found";
 
@@ -8,6 +9,7 @@ interface UpdateLevelUserRequest {
 
 type UpdateLevelUserResponse = void;
 
+@Injectable()
 export class UpdateLevelUser {
     constructor(private userRepository: userRepository) {}
 

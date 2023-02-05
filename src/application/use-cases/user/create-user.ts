@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { Name } from "src/application/entities/user/name";
 import { Password } from "src/application/entities/user/password";
 import { User } from "src/application/entities/user/user";
@@ -13,10 +14,13 @@ interface CreateUserResponse {
     user: User
 }
 
+@Injectable()
 export class CreateUser {
     constructor(private userRepository: userRepository) {}
 
-    async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
+    async execute(
+        request: CreateUserRequest
+        ): Promise<CreateUserResponse> {
         const { name, password, level } = request;
 
         const user = new User({
@@ -28,10 +32,7 @@ export class CreateUser {
         await this.userRepository.create(user)
 
         return {
-            user,
-        };
-
-
+            user
+        }
     }
-
 }

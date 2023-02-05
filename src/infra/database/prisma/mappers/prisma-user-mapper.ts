@@ -13,12 +13,14 @@ export class PrismaUserMapper {
     }
 
     static toDomain(raw: RawUser): User {
-        return {
-            id: raw.id,
-            name: new Name(raw.name),
-            password: new Password(raw.password),
-            level: raw.level
-        };
+        return new User(
+            {
+                id: raw.id,
+                name: new Name(raw.name),
+                password: new Password(raw.password),
+                level: raw.level
+            }
+        )
     }
 
     

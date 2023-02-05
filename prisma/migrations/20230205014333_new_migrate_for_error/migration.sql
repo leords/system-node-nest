@@ -3,7 +3,7 @@ CREATE TABLE "user" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "level" TEXT NOT NULL
+    "level" INTEGER NOT NULL
 );
 
 -- CreateTable
@@ -60,7 +60,9 @@ CREATE TABLE "item" (
     "milliliterBale" REAL NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "providerId" INTEGER NOT NULL,
-    CONSTRAINT "item_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "provider" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "stockId" INTEGER,
+    CONSTRAINT "item_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "provider" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "item_stockId_fkey" FOREIGN KEY ("stockId") REFERENCES "Stock" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -80,7 +82,7 @@ CREATE TABLE "bag" (
 -- CreateTable
 CREATE TABLE "sale" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "amout" INTEGER NOT NULL,
+    "amount" INTEGER NOT NULL,
     "total" REAL NOT NULL,
     "itemId" INTEGER NOT NULL,
     "bagId" INTEGER NOT NULL,
@@ -104,6 +106,35 @@ CREATE TABLE "charge" (
     "name" TEXT NOT NULL,
     "deliveryId" INTEGER,
     CONSTRAINT "charge_deliveryId_fkey" FOREIGN KEY ("deliveryId") REFERENCES "delivery" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Loan" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "amount" INTEGER NOT NULL,
+    "loanIdEmployee" INTEGER NOT NULL,
+    "loanIdClient" INTEGER NOT NULL,
+    CONSTRAINT "Loan_loanIdEmployee_fkey" FOREIGN KEY ("loanIdEmployee") REFERENCES "employee" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Loan_loanIdClient_fkey" FOREIGN KEY ("loanIdClient") REFERENCES "client" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Bottle" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
+    "loanId" INTEGER,
+    CONSTRAINT "Bottle_loanId_fkey" FOREIGN KEY ("loanId") REFERENCES "Loan" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Stock" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "amount" INTEGER NOT NULL,
+    "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "type" TEXT NOT NULL
 );
 
 -- CreateIndex

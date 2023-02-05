@@ -1,11 +1,19 @@
-import { Body, Controller, Post, Get } from "@nestjs/common";
+import { Body, Controller, Post, Get, Patch } from "@nestjs/common";
+import { Param } from "@nestjs/common/decorators";
 import { CreateUser } from "src/application/use-cases/user/create-user";
+import { DeleteUser } from "src/application/use-cases/user/delete-user";
 import { FindManyUser } from "src/application/use-cases/user/findMany-user";
 import { CreateUserBody } from "../dtos/user/create-user-body";
+import { UserViewModel } from "../view-models/user-view-model";
 
 @Controller('user')
 export class userController {
-    constructor(private createUser: CreateUser, private findManyUser: FindManyUser) {}
+    constructor(
+        private createUser: CreateUser, 
+        private findManyUser: FindManyUser,
+        private deleteUser: DeleteUser,
+        
+        ) {}
 
     @Post('new')
     async create(@Body() body: CreateUserBody) {
@@ -18,7 +26,7 @@ export class userController {
         });
 
         return {
-            user
+            user: UserViewModel.toHTTP(user)
         };
     }
 
@@ -28,4 +36,11 @@ export class userController {
 
         return users
     }
+
+    @Patch(':id/delete')
+    async delete(@Param('id') id: number) {
+        await this.deleteUser.execute({
+            id: id
+        });
+    } 
 }

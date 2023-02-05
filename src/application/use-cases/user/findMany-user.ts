@@ -13,7 +13,7 @@ export class FindManyUser {
 
         async execute(): Promise<FindManyUserResponse> {
             
-        const users =  await this.userRepository.FindMany()
+        const users = await this.userRepository.FindMany()
 
             return {
                 users
